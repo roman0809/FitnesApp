@@ -1,61 +1,77 @@
 ﻿using FitnesAppBL.Model;
 using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FitnesAppBL.Controller
 {
     /// <summary>
     /// Контроллер пользователя.
     /// </summary>
-    public class UserController
+    
+        public class UserController 
     {
         /// <summary>
         /// Пользователь приложения.
         /// </summary>
-        public User User { get; }
+        public List<User> Users { get; }
+
+        public User CurrentUser { get; }
+
+        public bool IsNewUser { get; } = false;
+
         /// <summary>
         /// Создание нового контроллера пользователя.
         /// </summary>
         /// <param name="user"></param>
-        public UserController(string userName, string genderName, DateTime birthDate, double weight, double height)
+        public UserController(string userName)
         {
-            var gender = new Gender (genderName);
-           User = new User(userName, gender, birthDate, weight, height);
+            if (string.IsNullOrWhiteSpace(userName))
+            {
+                throw new ArgumentNullException("Имя пользователя не может быть пустым", nameof(userName));
+            }
+
+            Users = GetUsersData();
+
+            CurrentUser = Users.SingleOrDefault(u => u.Name == userName);
+
+            if (CurrentUser == null)
+            {
+                CurrentUser = new User(userName);
+                Users.Add(CurrentUser);
+                IsNewUser = true;
+            }
+        }
+
+        /// <summary>
+        /// Получить сохраненный список пользователей.
+        /// </summary>
+        /// <returns></returns>
+        private List<User> GetUsersData()
+        {
+            return Load<User>() ?? new List<User>();
+        }
+
+
+        public void SetNewUserData(string genderName, DateTime birthDate, double weight = 1, double height = 1)
+        {
+            // Проверка
+
+            CurrentUser.Gender = new Gender(genderName);
+            CurrentUser.BirthDate = birthDate;
+            CurrentUser.Weight = weight;
+            CurrentUser.Height = height;
+            Save();
         }
 
         /// <summary>
         /// Сохранить данные пользователя.
         /// </summary>
-        public void Save()
+        public void Save(List<User> users)
         {
-            var formatter = new BinaryFormatter();
-            using(var fs=new FileStream("users.dat",FileMode.OpenOrCreate))
-            {
-                formatter.Serialize(fs, User);
-            }
-        }
-        /// <summary>
-        /// Получить данные пользователя.
-        /// </summary>
-        /// <returns>Пользователь приложения.</returns>
-        public UserController()
-        {
-            var formatter = new BinaryFormatter();
-            using (var fs= new FileStream("users.dat", FileMode.OpenOrCreate))
-            {
-                if(formatter.Deserialize(fs) is User user)
-                {
-                    User = user;
-                    //TODO
-                }
-                
-            }
+            Save(Users);
         }
     }
 }

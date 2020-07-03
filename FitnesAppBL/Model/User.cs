@@ -21,12 +21,12 @@ namespace FitnesAppBL.Model
         /// Пол.
         /// </summary>
 
-        public  Gender Gender { get; }
+        public  Gender Gender { get; set; }
         /// <summary>
         /// День рождения.
         /// </summary>
 
-        public DateTime BirthDate { get; }
+        public DateTime BirthDate { get; set; }
         /// <summary>
         /// Вес.
         /// </summary>
@@ -37,6 +37,10 @@ namespace FitnesAppBL.Model
         /// </summary>
 
         public double Height { get; set; }
+
+        public int Age { get { return DateTime.Now.Year - BirthDate.Year; } }
+
+        
         #endregion
         /// <summary>
         /// Создать нового пользователя.
@@ -77,10 +81,17 @@ namespace FitnesAppBL.Model
             Height = height;
 
         }
-
+        public User(string name)
+        {
+            if(string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentNullException("Имя пользователя не может быть пустым или раным null", nameof(name));
+            }
+            Name = name;
+        }
         public override string ToString()
         {
-            return Name;
+            return Name+" "+ Age;
         }
 
     }
