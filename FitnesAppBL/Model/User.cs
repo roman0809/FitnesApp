@@ -21,7 +21,7 @@ namespace FitnesAppBL.Model
         /// Пол.
         /// </summary>
 
-        public  Gender Gender { get; set; }
+        public virtual Gender Gender { get; set; }
         /// <summary>
         /// День рождения.
         /// </summary>
@@ -81,6 +81,8 @@ namespace FitnesAppBL.Model
             Height = height;
 
         }
+        public User() { }
+
         public User(string name)
         {
             if(string.IsNullOrWhiteSpace(name))

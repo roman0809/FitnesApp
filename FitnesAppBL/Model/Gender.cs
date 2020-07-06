@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace FitnesAppBL.Model
 {
+    [Serializable]
     /// <summary>
     /// Пол.
     /// </summary>
@@ -19,6 +21,8 @@ namespace FitnesAppBL.Model
         /// Создать новый пол.
         /// </summary>
         /// <param name="name">Имя пола.</param>
+        
+        public Gender() { }
 
         public Gender(string name)
         {
