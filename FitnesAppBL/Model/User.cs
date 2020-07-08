@@ -13,14 +13,16 @@ namespace FitnesAppBL.Model
     public class User
     {
         #region Свойства
+        public int Id { get; set; }
+
         /// <summary>
         /// Имя.
         /// </summary>
-        public string Name { get; }
+        public string Name { get; set; }
         /// <summary>
         /// Пол.
         /// </summary>
-
+        public int? GenderId { get; set; }
         public virtual Gender Gender { get; set; }
         /// <summary>
         /// День рождения.
@@ -37,6 +39,9 @@ namespace FitnesAppBL.Model
         /// </summary>
 
         public double Height { get; set; }
+
+        public virtual ICollection<Eating> Eatings { get; set; }
+        public virtual ICollection<Exercise> Exercises { get; set; }
 
         public int Age { get { return DateTime.Now.Year - BirthDate.Year; } }
 

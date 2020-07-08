@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Управление общими сведениями о сборке осуществляется с помощью указанного ниже 
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // общие сведения об этой сборке.
-[assembly: AssemblyTitle("FitnesApp.BLTests2")]
+[assembly: AssemblyTitle("FitnesApp.BLTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FitnesApp.BLTests2")]
+[assembly: AssemblyProduct("FitnesApp.BLTests")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("92615388-9390-44d2-bb31-27e7131bbc34")]
+[assembly: Guid("4e6debca-e809-4073-9c7b-fbfe2703555a")]
 
 // Сведения о версии сборки состоят из следующих четырех значений:
 //

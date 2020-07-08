@@ -11,7 +11,7 @@ namespace FitnesApp.CMD
     {
         static void Main(string[] args)
         {
-            var culture = CultureInfo.CreateSpecificCulture("en-us");
+            var culture = CultureInfo.CreateSpecificCulture("");
             var resourseManager = new ResourceManager("FitnesApp.CMD.Languages.Messages", typeof(Program).Assembly);
 
             Console.WriteLine(resourseManager.GetString("Hallo",culture));
@@ -29,7 +29,7 @@ namespace FitnesApp.CMD
                 DateTime birthDate;
                 double weight = ParseDouble("Вес");
                 double height = ParseDouble("Рост");
-                birthDate = ParseDateTime();
+                birthDate = ParseDateTime("Дата рождения");
 
                 userController.SetNewUserData(gender, birthDate, weight, height);
             }
@@ -79,15 +79,18 @@ namespace FitnesApp.CMD
             }
         }
 
-        private static (DateTime Begin,DateTime End,Activity Activity) EnterExercise()
+        private static (DateTime Begin, DateTime End, Activity Activity) EnterExercise()
         {
-            Console.Write("Введите название упражнения: ");
+            Console.Write("Введите название упражнения:");
             var name = Console.ReadLine();
-            var energy = ParseDouble("Росход енергии в минуту");
-            var begin = ParseDateTime();
-            var end = ParseDateTime();
+
+            var energy = ParseDouble("расход энергии в минуту");
+
+            var begin = ParseDateTimeAtiv("время начала упражнения");
+            var end = ParseDateTimeAtiv("время окончания упражнения");
+
             var activity = new Activity(name, energy);
-            return (begin,end,activity);
+            return (begin, end, activity);
         }
 
         private static (Food Food, double Weight) EnterEating()
@@ -107,19 +110,37 @@ namespace FitnesApp.CMD
             return (Food: product,Weight: weight);
         }
 
-        private static DateTime ParseDateTime()
+        private static DateTime ParseDateTime(string value)
         {
             DateTime birthDate;
             while (true)
             {
-                Console.WriteLine("Введите дату рождения (dd.mm.yyyy): ");
-               if (DateTime.TryParse(Console.ReadLine(), out birthDate)) 
+                Console.Write($"Введите {value} (dd.MM.yyyy): ");
+                if (DateTime.TryParse(Console.ReadLine(), out birthDate))
                 {
                     break;
                 }
-               else
+                else
                 {
-                    Console.WriteLine("Неверный формат даты рождения");
+                    Console.WriteLine($"Неверный формат {value}");
+                }
+            }
+
+            return birthDate;
+        }
+        private static DateTime ParseDateTimeAtiv(string value)
+        {
+            DateTime birthDate;
+            while (true)
+            {
+                Console.Write($"Введите {value} (hh:MM): ");
+                if (DateTime.TryParse(Console.ReadLine(), out birthDate))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine($"Неверный формат {value}");
                 }
             }
 

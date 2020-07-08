@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{92615388-9390-44D2-BB31-27E7131BBC34}</ProjectGuid>
+    <ProjectGuid>{4E6DEBCA-E809-4073-9C7B-FBFE2703555A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FitnesApp.BLTests2</RootNamespace>
-    <AssemblyName>FitnesApp.BLTests2</AssemblyName>
+    <RootNamespace>FitnesApp.BLTests</RootNamespace>
+    <AssemblyName>FitnesApp.BLTests</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
